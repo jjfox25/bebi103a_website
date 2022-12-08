@@ -175,7 +175,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script1.py">Fig. 1: Bacterial growth across time. </a></b>
-<p> Used to generate Figure 1 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 1 after running main() from script9.3.py. We see that the data consists of many rounds of growth of a single bacterium, with time on the x axis and area on the y axis.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -191,7 +191,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script2.py">Fig. 2: Growth time-normalized bacterial growth data. </a></b>
-<p> Used to generate Figure 2 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 2 after running main() from script9.3.py. This view of the data is necessary to perform MLE. Previously in figure 1, each growth event has a different value for time. Here, we plot each growth event with relative time since the previous growth event.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -207,7 +207,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script3.py">Fig. 3: MLE's with 95% CI for parameters from the linear model.</a></b>
-<p> Used to generate Figure 3 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 3 after running main() from script9.3.py. This plot shows the MLE's and 95% CI ffor model parameters for each growth event.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -239,7 +239,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script5.py">Fig. 5: AIC comparison of linear and exponential models. </a></b>
-<p> Used to generate Figure 5 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 5 after running main() from script9.3.py. This figure compares the AIC for each growth event in each model. The linear AIC is on the x axis and the exponential AIC is on the y axis. Since the better model is the one with the lower AIC, we graph the diagonal line linear_AIC = exponential AIC. We see that many of the dots are close to the line, and it is hard to tell which side of the line they lie.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -255,7 +255,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script6.py">Fig. 6: Linear/exponential AIC ratio for each growth event. </a></b>
-<p> Used to generate Figure 6 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 6 after running main() from script9.3.py. This figure shows the ratio of AIC licnear:exponential. We see that about 75% of the growth events had an AIC ratio below 0, meaning that the majority of the time the linear model is the better model of single bacterium growth.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -271,7 +271,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script7.py">Fig. 7: AIC weight for each growth event in the linear model. </a></b>
-<p> Used to generate Figure 7 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 7 after running main() from script9.3.py. The AIC weight provides more evidence that the linear model is the better model. The AIC weight for the linear model is shown for each growth event. The model with the higher AIC weights is the better model.</p>
 
 <i>Necessary Data Sets </i><br />
 
@@ -287,7 +287,7 @@
 
 <div class="post-content">
 <b class="post-title"><a href="http://localhost:4000//software/script8.py">Fig. 8: AIC weight for each growth event in the exponential model.</a></b>
-<p> Used to generate Figure 8 after running main() from script9.3.py.</p>
+<p> Used to generate Figure 8 after running main() from script9.3.py. Compared to Figure 7, we can see that the AIC weights for the exponential model are generally lower than the AIC weights for the linear model. We therefore conclude that the linear model is the better model of single bacterium growth.</p>
 
 <i>Necessary Data Sets </i><br />
 

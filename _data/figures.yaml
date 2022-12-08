@@ -1,7 +1,7 @@
 - fig:
   title: "Fig. 1: Bacterial growth across time. "
   filename: script1.py
-  desc:  Used to generate Figure 1 after running main() from script9.3.py.
+  desc:  Used to generate Figure 1 after running main() from script9.3.py. We see that the data consists of many rounds of growth of a single bacterium, with time on the x axis and area on the y axis.
   pic: bokeh_plot-22.png
   req:
     - ds: 
@@ -13,7 +13,7 @@
   title: "Fig. 2: Growth time-normalized bacterial growth data. "
   filename: script2.py
   desc: 
-      Used to generate Figure 2 after running main() from script9.3.py.
+      Used to generate Figure 2 after running main() from script9.3.py. This view of the data is necessary to perform MLE. Previously in figure 1, each growth event has a different value for time. Here, we plot each growth event with relative time since the previous growth event.
   pic: bokeh_plot-23.png
   req:
     - ds:
@@ -25,7 +25,7 @@
   title: "Fig. 3: MLE's with 95% CI for parameters from the linear model."
   filename: script3.py
   desc:
-      Used to generate Figure 3 after running main() from script9.3.py.
+      Used to generate Figure 3 after running main() from script9.3.py. This plot shows the MLE's and 95% CI ffor model parameters for each growth event.
   pic: bokeh_plot-16.png
   req:
     - ds:
@@ -49,7 +49,7 @@
   title: "Fig. 5: AIC comparison of linear and exponential models. "
   filename: script5.py
   desc:
-      Used to generate Figure 5 after running main() from script9.3.py.
+      Used to generate Figure 5 after running main() from script9.3.py. This figure compares the AIC for each growth event in each model. The linear AIC is on the x axis and the exponential AIC is on the y axis. Since the better model is the one with the lower AIC, we graph the diagonal line linear_AIC = exponential AIC. We see that many of the dots are close to the line, and it is hard to tell which side of the line they lie.
   pic: bokeh_plot-18.png
   req:
     - ds:
@@ -61,7 +61,7 @@
   title: "Fig. 6: Linear/exponential AIC ratio for each growth event. "
   filename: script6.py
   desc:
-      Used to generate Figure 6 after running main() from script9.3.py.
+      Used to generate Figure 6 after running main() from script9.3.py. This figure shows the ratio of AIC licnear:exponential. We see that about 75% of the growth events had an AIC ratio below 0, meaning that the majority of the time the linear model is the better model of single bacterium growth.
   pic: bokeh_plot-19.png
   req:
     - ds:
@@ -73,7 +73,7 @@
   title: "Fig. 7: AIC weight for each growth event in the linear model. "
   filename: script7.py
   desc:
-      Used to generate Figure 7 after running main() from script9.3.py.
+      Used to generate Figure 7 after running main() from script9.3.py. The AIC weight provides more evidence that the linear model is the better model. The AIC weight for the linear model is shown for each growth event. The model with the higher AIC weights is the better model.
   pic: bokeh_plot-20.png
   req:
     - ds:
@@ -85,7 +85,7 @@
   title: "Fig. 8: AIC weight for each growth event in the exponential model."
   filename: script8.py
   desc:
-      Used to generate Figure 8 after running main() from script9.3.py.
+      Used to generate Figure 8 after running main() from script9.3.py. Compared to Figure 7, we can see that the AIC weights for the exponential model are generally lower than the AIC weights for the linear model. We therefore conclude that the linear model is the better model of single bacterium growth.
   pic: bokeh_plot-21.png
   req:
     - ds:
