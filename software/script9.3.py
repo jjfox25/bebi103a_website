@@ -17,33 +17,6 @@ import colorcet
 from bokeh.palettes import Category10_10 as palette
 import bokeh.plotting
 
-def main(data_path):
-	df = pd.read_csv(data_path)
-	bac1 = df.loc[df['bacterium'] == 1]
-	bac2 = df.loc[df['bacterium'] == 2]
-	bac_list = [bac1, bac2]
-	bac_list_string = ['bac1','bac2']
-	
-	bac2['growth event'] = bac2['growth event'] + 20
-
-	bac1_unique = list(bac1['growth event'].unique())
-	bac2_unique = list(bac2['growth event'].unique())
-
-	ge_unique = bac1_unique + bac2_unique
-
-	df = pd.concat([bac1, bac2], axis = 0)
-
-	master_list = []
-
-	for i in ge_unique:
-    		temp = df.loc[df['growth event']==i]
-    		temp_list = []
-    		for n in range(len(temp)):
-        		temp_list.append(n+1)
-   		master_list = master_list + temp_list
-
-	df['growth_time'] = master_list
-
 def theor_area_linear(a0, k, t):
     '''Linear model of bacterial growth.'''
     return a0*(1 + k*t)
@@ -126,113 +99,101 @@ def log_likelihood_exp(params, t):
     mu = theor_area_exp(a0, k, t)
     return np.sum(st.norm.logpdf(mu, sigma))
 
-df = pd.read_csv('https://s3.amazonaws.com/bebi103.caltech.edu/data/caulobacter_growth_events.csv')
+def main(data_path):
+    '''Main function to perform MLE given the path of the input data.'''
+    df = pd.read_csv(data_path)
+    bac1 = df.loc[df['bacterium'] == 1]
+    bac2 = df.loc[df['bacterium'] == 2]
+    bac_list = [bac1, bac2]
+    bac_list_string = ['bac1','bac2']
 
-bac1 = df.loc[df['bacterium'] == 1]
-bac2 = df.loc[df['bacterium'] == 2]
+    bac2['growth event'] = bac2['growth event'] + 20
 
-bac_list = [bac1, bac2]
-bac_list_string = ['bac1','bac2']
+    bac1_unique = list(bac1['growth event'].unique())
+    bac2_unique = list(bac2['growth event'].unique())
 
-bac2['growth event'] = bac2['growth event'] + 20
+    ge_unique = bac1_unique + bac2_unique
 
-bac1_unique = list(bac1['growth event'].unique())
-bac2_unique = list(bac2['growth event'].unique())
+    df = pd.concat([bac1, bac2], axis = 0)
 
-ge_unique = bac1_unique + bac2_unique
+    master_list = []
 
-df = pd.concat([bac1, bac2], axis = 0)
+    for i in ge_unique:
+        temp = df.loc[df['growth event']==i]
+    	temp_list = []
+    	for n in range(len(temp)):
+            temp_list.append(n+1)
+   	master_list = master_list + temp_list
 
-master_list = []
+    df['growth_time'] = master_list
 
-for i in ge_unique:
-    temp = df.loc[df['growth event']==i]
-    temp_list = []
-    for n in range(len(temp)):
-        temp_list.append(n+1)
-    master_list = master_list + temp_list
+    print('MLE linear')
+    results = np.empty((len(df["growth event"].unique()), 3))
+    for event, g in df.groupby("growth event"):
+    	results[event] = mle(g["area (µm²)"].values, g["growth_time"].values)
+    df_mle = pd.DataFrame(data=results, columns=["a0", "k", "σ (a.u.)"])
+    print('a0_avg_lin: ', df_mle['a0'].mean())
+    print('k_avg_lin: ', df_mle['k'].mean())
 
-df['growth_time'] = master_list
+    print('MLE exponential')
+    results_exp = np.empty((len(df["growth event"].unique()), 3))
+    for event, g in df.groupby("growth event"):
+        results_exp[event] = mle_exp(g["area (µm²)"].values, g["growth_time"].values)
+    df_mle_exp = pd.DataFrame(data=results_exp, columns=["a0", "k", "σ (a.u.)"])
+    print('a0_avg_exp: ', df_mle_exp['a0'].mean())
+    print('k_avg_exp: ', df_mle_exp['k'].mean())
 
-print('MLE linear')
-results = np.empty((len(df["growth event"].unique()), 3))
-for event, g in df.groupby("growth event"):
-    results[event] = mle(
-        g["area (µm²)"].values, g["growth_time"].values
-    )
-df_mle = pd.DataFrame(
-    data=results,
-    columns=["a0", "k", "σ (a.u.)"],
-)
-print('a0_avg_lin: ', df_mle['a0'].mean())
-print('k_avg_lin: ', df_mle['k'].mean())
+    reps = {}
+    for event, g in tqdm.tqdm(df.groupby("growth event")):
+        # Extract time points and area measurements
+        t = g["growth_time"].values
+        data = g["area (µm²)"].values
 
-print('MLE exponential')
-results_exp = np.empty((len(df["growth event"].unique()), 3))
-for event, g in df.groupby("growth event"):
-    results_exp[event] = mle_exp(
-        g["area (µm²)"].values, g["growth_time"].values
-    )
-df_mle_exp = pd.DataFrame(
-    data=results_exp,
-    columns=["a0", "k", "σ (a.u.)"],
-)
-print('a0_avg_exp: ', df_mle_exp['a0'].mean())
-print('k_avg_exp: ', df_mle_exp['k'].mean())
+        # Generate bootstrap replicates
+        reps[event] = bebi103.bootstrap.draw_bs_reps_mle(
+            mle,
+            gen_linear,
+            data=data,
+            mle_args=(t,),
+            gen_args=(t,),
+            size=1000,
+            n_jobs=3)
 
-reps = {}
-for event, g in tqdm.tqdm(df.groupby("growth event")):
-    # Extract time points and area measurements
-    t = g["growth_time"].values
-    data = g["area (µm²)"].values
+    reps_exp = {}
+    for event, g in tqdm.tqdm(df.groupby("growth event")):
+        # Extract time points and area measurements
+        t = g["growth_time"].values
+        data = g["area (µm²)"].values
 
-    # Generate bootstrap replicates
-    reps[event] = bebi103.bootstrap.draw_bs_reps_mle(
-        mle,
-        gen_linear,
-        data=data,
-        mle_args=(t,),
-        gen_args=(t,),
-        size=1000,
-        n_jobs=3,
-    )
+        # Generate bootstrap replicates
+        reps_exp[event] = bebi103.bootstrap.draw_bs_reps_mle(
+            mle_exp,
+            gen_exp,
+            data=data,
+            mle_args=(t,),
+            gen_args=(t,),
+            size=1000,
+            n_jobs=3)
 
-reps_exp = {}
-for event, g in tqdm.tqdm(df.groupby("growth event")):
-    # Extract time points and area measurements
-    t = g["growth_time"].values
-    data = g["area (µm²)"].values
+    AIC_lin = []
+    AIC_exp = []
 
-    # Generate bootstrap replicates
-    reps_exp[event] = bebi103.bootstrap.draw_bs_reps_mle(
-        mle_exp,
-        gen_exp,
-        data=data,
-        mle_args=(t,),
-        gen_args=(t,),
-        size=1000,
-        n_jobs=3,
-    )
-
-AIC_lin = []
-AIC_exp = []
-
-for i in ge_unique:
-    temp = df.loc[df['growth event']==i]
+    for i in ge_unique:
+        temp = df.loc[df['growth event']==i]
     
-    # compute log likelihood
-    temp_loglike_lin = log_likelihood_linear(df_mle.iloc[i,:], temp["growth_time"])
-    temp_loglike_exp = log_likelihood_exp(df_mle_exp.iloc[i,:], temp["growth_time"])
+        # compute log likelihood
+        temp_loglike_lin = log_likelihood_linear(df_mle.iloc[i,:], temp["growth_time"])
+        temp_loglike_exp = log_likelihood_exp(df_mle_exp.iloc[i,:], temp["growth_time"])
     
-    # compute AIC defined as -2 * (log_likelihood - number_of_parameters)
-    temp_AIC_lin = -2 * (temp_loglike_lin - 3)
-    temp_AIC_exp = -2 * (temp_loglike_exp - 3)
+        # compute AIC defined as -2 * (log_likelihood - number_of_parameters)
+        temp_AIC_lin = -2 * (temp_loglike_lin - 3)
+        temp_AIC_exp = -2 * (temp_loglike_exp - 3)
     
-    AIC_lin.append(temp_AIC_lin)
-    AIC_exp.append(temp_AIC_exp)
+        AIC_lin.append(temp_AIC_lin)
+        AIC_exp.append(temp_AIC_exp)
 
-results = pd.DataFrame(np.array([ge_unique, 
-                                 df_mle.iloc[:,0], 
+    results = pd.DataFrame(np.array([ge_unique,
+				 df_mle.iloc[:,0], 
                                  df_mle.iloc[:,1],
                                  df_mle.iloc[:,2],
                                  df_mle_exp.iloc[:,0], 
@@ -241,7 +202,7 @@ results = pd.DataFrame(np.array([ge_unique,
                                  AIC_lin, 
                                  AIC_exp
                                 ]).T)
-results.columns = ['growth event',
+    results.columns = ['growth event',
                    'a0_lin',
                    'k_lin',
                    'sigma_lin',
@@ -249,11 +210,12 @@ results.columns = ['growth event',
                    'k_exp',
                    'sigma_exp',
                    'AIC_lin',
-                   'AIC_exp'
-]
+                   'AIC_exp']
 
-results['AIC_ratio_lin_to_exp'] = results['AIC_lin'] / results['AIC_exp']
+    results['AIC_ratio_lin_to_exp'] = results['AIC_lin'] / results['AIC_exp']
 
-results['w_linear'] = np.exp(-results['AIC_lin']/2) / (np.exp(-results['AIC_lin']/2) + np.exp(-results['AIC_exp']/2))
-results['w_exp'] = np.exp(-results['AIC_exp']/2) / (np.exp(-results['AIC_exp']/2) + np.exp(-results['AIC_lin']/2))
+    results['w_linear'] = np.exp(-results['AIC_lin']/2) / (np.exp(-results['AIC_lin']/2) + np.exp(-results['AIC_exp']/2))
+    results['w_exp'] = np.exp(-results['AIC_exp']/2) / (np.exp(-results['AIC_exp']/2) + np.exp(-results['AIC_lin']/2))
+
+    return results
 

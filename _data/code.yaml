@@ -1,13 +1,4 @@
 - script:
-  name: script1.py
-  desc: >
-    Super fancy script which calcualate some complicated stuff with
-    well-documented code.
-- script:
-  name: script2.py
-  desc: >
-    Yet another script that does something-or-other.
-- script:
   name: script9.3.py
   desc: >
     Script to process caulobacter growth data and compute MLE's with CI's and AIC.

@@ -160,89 +160,143 @@
 <h2 id="code">Code</h2>
 
 <ul>
-  <li>
-    <p><a href="http://localhost:4000//software/script1.py"><strong>script1.py</strong></a>
-| Super fancy script which calcualate some complicated stuff with well-documented code.</p>
-  </li>
-  <li>
-    <p><a href="http://localhost:4000//software/script2.py"><strong>script2.py</strong></a>
-| Yet another script that does something-or-other.</p>
-  </li>
-  <li>
-    <p><a href="http://localhost:4000//software/script9.3.py"><strong>script9.3.py</strong></a>
-| Script to process caulobacter growth data and compute MLE’s with CI’s and AIC.</p>
-  </li>
+  <li><a href="http://localhost:4000//software/script9.3.py"><strong>script9.3.py</strong></a>
+| Script to process caulobacter growth data and compute MLE’s with CI’s and AIC.</li>
 </ul>
 
 <h2 id="data-sets">Data Sets</h2>
 
 <ul>
-  <li>
-    <p><a href="http://localhost:4000//datasets/dataset1.csv">Sampling statistics from some fancy experiment</a> | (filetype:
-.csv)(24 MB)</p>
-  </li>
-  <li>
-    <p><a href="http://localhost:4000//datasets/dataset2.csv">Table of measurements from an old-school study for comparison</a> | (filetype:
-.csv)</p>
-  </li>
-  <li>
-    <p><a href="https://data.caltech.edu">Anonymized data from web scraping</a> | (filetype:
-.zip)(2 gb)</p>
-  </li>
+  <li><a href="https://s3.amazonaws.com/bebi103.caltech.edu/data/caulobacter_growth_events.csv">Tidyed data of caulobacter growth from Iyer-Biswas et al 2014.</a> | (filetype:
+.csv)(240 kb)</li>
 </ul>
 
 <h2 id="figure-generation">Figure Generation</h2>
 
 <article class="post">
 
-<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/fig1.png)" href="/figures/"> </a>
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-22.png)" href="/figures/"> </a>
 
 <div class="post-content">
-<b class="post-title"><a href="http://localhost:4000//software/script1.py">Fig. 1: Paleo cardigan kombucha, pickled brunch shabby chic </a></b>
-<p> Used to generate the figure1</p>
+<b class="post-title"><a href="http://localhost:4000//software/script1.py">Fig. 1: Bacterial growth across time. </a></b>
+<p> Used to generate Figure 1 after running main() from script9.3.py.</p>
 
 <i>Necessary Data Sets </i><br />
 
 
-<a style="font-size: 0.9em;" href="{{ds.link}}"> - Dataset 1 </a><br />
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
 
 </div>
 </article>
 
 <article class="post">
 
-<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/fig2.png)" href="/figures/"> </a>
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-23.png)" href="/figures/"> </a>
 
 <div class="post-content">
-<b class="post-title"><a href="http://localhost:4000//software/script2.py">Fig. 2: Activated charcoal tilde kombucha. </a></b>
-<p> Used to generate Figure 2, illustrating activated kombucha on tap.</p>
+<b class="post-title"><a href="http://localhost:4000//software/script2.py">Fig. 2: Growth time-normalized bacterial growth data. </a></b>
+<p> Used to generate Figure 2 after running main() from script9.3.py.</p>
 
 <i>Necessary Data Sets </i><br />
 
 
-<a style="font-size: 0.9em;" href="{{site.url}}/{{site.baseurl}}/datasets/{{ds.link}}"> - Kombucha tempura desconstructed measures </a><br />
-
-
-<a style="font-size: 0.9em;" href="{{site.url}}/{{site.baseurl}}/datasets/{{ds.link}}"> - Gravitational wave lo-fi beats to chill and study to </a><br />
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
 
 </div>
 </article>
 
 <article class="post">
 
-<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/fig3.png)" href="/figures/"> </a>
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-16.png)" href="/figures/"> </a>
 
 <div class="post-content">
-<b class="post-title"><a href="http://localhost:4000//software/script1.py">Fig. 5: Sustainable pour-over VHS</a></b>
-<p> Used to generate Figure 5,</p>
+<b class="post-title"><a href="http://localhost:4000//software/script3.py">Fig. 3: MLE's with 95% CI for parameters from the linear model.</a></b>
+<p> Used to generate Figure 3 after running main() from script9.3.py.</p>
 
 <i>Necessary Data Sets </i><br />
 
 
-<a style="font-size: 0.9em;" href="{{site.url}}/{{site.baseurl}}/datasets/{{ds.link}}"> - Summarized dataset 1 </a><br />
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
+
+</div>
+</article>
+
+<article class="post">
+
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-17.png)" href="/figures/"> </a>
+
+<div class="post-content">
+<b class="post-title"><a href="http://localhost:4000//software/script4.py">Fig. 4: MLE's with 95% CI for parameters from the exponential model. </a></b>
+<p> Used to generate Figure 4 after running main() from script9.3.py.</p>
+
+<i>Necessary Data Sets </i><br />
 
 
-<a style="font-size: 0.9em;" href="{{ds.link}}"> - Summarized dataset 2 </a><br />
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
+
+</div>
+</article>
+
+<article class="post">
+
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-18.png)" href="/figures/"> </a>
+
+<div class="post-content">
+<b class="post-title"><a href="http://localhost:4000//software/script5.py">Fig. 5: AIC comparison of linear and exponential models. </a></b>
+<p> Used to generate Figure 5 after running main() from script9.3.py.</p>
+
+<i>Necessary Data Sets </i><br />
+
+
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
+
+</div>
+</article>
+
+<article class="post">
+
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-19.png)" href="/figures/"> </a>
+
+<div class="post-content">
+<b class="post-title"><a href="http://localhost:4000//software/script6.py">Fig. 6: Linear/exponential AIC ratio for each growth event. </a></b>
+<p> Used to generate Figure 6 after running main() from script9.3.py.</p>
+
+<i>Necessary Data Sets </i><br />
+
+
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
+
+</div>
+</article>
+
+<article class="post">
+
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-20.png)" href="/figures/"> </a>
+
+<div class="post-content">
+<b class="post-title"><a href="http://localhost:4000//software/script7.py">Fig. 7: AIC weight for each growth event in the linear model. </a></b>
+<p> Used to generate Figure 7 after running main() from script9.3.py.</p>
+
+<i>Necessary Data Sets </i><br />
+
+
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
+
+</div>
+</article>
+
+<article class="post">
+
+<a class="post-thumbnail" style="background-image: url(http://localhost:4000//assets/img/bokeh_plot-21.png)" href="/figures/"> </a>
+
+<div class="post-content">
+<b class="post-title"><a href="http://localhost:4000//software/script8.py">Fig. 8: AIC weight for each growth event in the exponential model.</a></b>
+<p> Used to generate Figure 8 after running main() from script9.3.py.</p>
+
+<i>Necessary Data Sets </i><br />
+
+
+<a style="font-size: 0.9em;" href="{{ds.link}}"> - Iyer-Biswas et al. Dataset </a><br />
 
 </div>
 </article>
