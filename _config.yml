@@ -1,36 +1,53 @@
-title: Your Research Project Title
-description: > # this means to ignore newlines until "baseurl:"
-  This website is an online repository for your manuscript. You should include a
-  concise (1-sentence) summary of your project here. This can be as simple as
-  the title of the paper.  
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-permalink: ':title/' # This declares the root of your website and shouldn't be touched.
-baseurl:  "/" # the subpath of your site, In most cases this can be left blank
-url: "" # Base of your website.In most cases, this will be left blank
+title: Modeling individual Caulobacter growth
+email: jjfox@caltech.edu
+description: >- # this means to ignore newlines until "baseurl:"
+  Website for BeBi103a homework 9.3.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username:
+github_username:  jfox25
 
-# You can include social icons
-site-twitter: #if your site has a twitter account, enter it here
-social-github: RPGroup-PBoC # add your Github handle here.
-social-email: username@hostname.com
-
-# If you are using google analytics to track website traffic, you can insert the
-# tracking key below. It will be automatically inserted into the header of every
-# website page
-# analytics:
-
-# You can include a logo for your work as a .png that is saved in the folder 
-# 'assets/img/'. If you want a logo to show up, put the filename of the logo here
-author-img: logo.png # Comment this line out if you don't want a logo
-
-
-# Build settings for the website. Do not modify this unless you know what you
-# are doing.
-markdown: kramdown
+# Build settings
+theme: minima
 plugins:
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jemoji
+  - jekyll-feed
 
-# Files to exclude from the website build. You may not want to include all data
-# files for example.
-exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock", "data_files"]
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/

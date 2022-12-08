@@ -9,23 +9,14 @@
 # of the `page01_people.md` file.
 # ##############################################################################
 - author:
-  name: Dr. Osophila
-  link: "https://en.wikipedia.org/wiki/Drosophila"
-  title: Postdoctoral Scholar
-  img: dr_osophila.jpg
-  institute: Bicoid Institute of Development
+  name: Jonathan Fox
+  title: Medical/Graduate Student G1
+  institute: Division of Biology and Biological Engineering, California Institute of Technology; Keck School of Medicine, University of Southern California
   other_info:
-     Email Address: "flyguy@university.edu"
+     Email Address: "jjfox@caltech.edu"
 - author:
-  name: Dr. Melanie O'Gaster
-  link: "https://en.wikipedia.org/wiki/Drosophila_melanogaster"
-  title: Postdoctoral Scholar
-  img: melanogaster.jpg
-  institute: French Flag Research Institute
+  name: Eugene Li
+  title: Graduate Student G1
+  institute: Division of Chemistry and Chemical Engineering, California Institute of Technology
   other_info:
-    Current Location: Apple Juice Plates, Inc
-
-- author:
-  name: Sally Monella
-  title: Research Technician
-  institute: French Flag Research Institute
+     Email Address: "eugeneli@caltech.edu"
